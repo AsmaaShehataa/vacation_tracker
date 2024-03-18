@@ -13,7 +13,9 @@ Deprecated==1.2.14
 Fabric==1.15.0
 flasgger==0.9.7.1
 Flask==3.0.1
+Flask-Bcrypt==1.0.1
 Flask-Cors==4.0.0
+Flask-Login==0.6.3
 Flask-Migrate==4.0.5
 Flask-SQLAlchemy==3.1.1
 future @ file:///AppleInternal/Library/BuildRoots/9dd5efe2-7fad-11ee-b588-aa530c46a9ea/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl
