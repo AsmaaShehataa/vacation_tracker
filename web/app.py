@@ -32,6 +32,7 @@ def teardown(Exception):
     """
     storage.close()
 
+@app.route("/", strict_slashes=False, methods=["GET", "POST"])
 @app.route('/home', strict_slashes=False, methods=["GET"])
 def home():
     """
@@ -39,7 +40,6 @@ def home():
     """
     return render_template("home.html")
 
-@app.route("/", strict_slashes=False, methods=["GET", "POST"])
 @app.route("/login", strict_slashes=False, methods=["GET", "POST"])
 def login():
     """
