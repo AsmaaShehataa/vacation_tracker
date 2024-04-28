@@ -334,7 +334,8 @@ def contact():
 def register():
 
     if request.method == "GET":
-        return render_template("register.html")
+            return redirect('/dashboard')
+
     
     formData = request.form.to_dict()
     print('formData', formData)
@@ -355,8 +356,8 @@ def register():
     hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
 
     unit_data = storage.get_unit_id_by_name(unit_id)
-    if unit_data is None:
-        return redirect('/register')
+    # if unit_data is None:
+    #     return redirect('/register')
     print('unit_data', unit_data)
 
     
