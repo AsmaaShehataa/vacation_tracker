@@ -351,7 +351,7 @@ def register():
     personal_phone=formData['Personal_Phone']
     unit_id=formData['Unit_ID']
     addr=formData['addr']
-    headUser=formData['Head_User_ID']
+    # headUser=formData['Head_User_ID']
     
     hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
 
