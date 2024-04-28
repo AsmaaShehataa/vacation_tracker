@@ -274,7 +274,7 @@ def apply_for_leave():
 
 
 @app.route("/dashboard", strict_slashes=False, methods=["GET", "POST"])
-@login_required
+# @login_required
 def dashboard():
     """
     users
