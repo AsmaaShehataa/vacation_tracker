@@ -330,8 +330,11 @@ def contact():
 
 
 
-@app.route("/register", strict_slashes=False, methods=["POST"])
+@app.route("/register", strict_slashes=False, methods=["GET", "POST"])
 def register():
+
+    if request.method == "GET":
+        return render_template("register.html")
     
     formData = request.form.to_dict()
     print('formData', formData)
@@ -345,7 +348,6 @@ def register():
     national_id=formData['National_ID_Number']
     phone=formData['Phone']
     personal_phone=formData['Personal_Phone']
-    title=formData['title']
     unit_id=formData['Unit_ID']
     addr=formData['addr']
     headUser=formData['Head_User_ID']
