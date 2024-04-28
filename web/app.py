@@ -332,20 +332,21 @@ def contact():
 
 @app.route("/register", strict_slashes=False, methods=["GET", "POST"])
 def register():
-    title=request.form.to_dict()["title"]
-    fname=request.form.to_dict()["fname"]
-    lname=request.form.to_dict()["sname"]
-    email = request.form.to_dict()['email']
-    password1 = request.form.to_dict()['password']
-    email2=request.form.to_dict()['personal_email']
-    user_role=request.form.to_dict()['user_role']
-    national_id=request.form.to_dict()['National_ID_Number']
-    phone=request.form.to_dict()['Phone']
-    personal_phone=request.form.to_dict()['Personal_Phone']
-    title=request.form.to_dict()['title']
-    unit_id=request.form.to_dict()['Unit_ID']
-    addr=request.form.to_dict()['addr']
-    headUser=request.form.to_dict()['Head_User_ID']
+    formData = request.form.to_dict()
+    title=formData["title"]
+    fname=formData["fname"]
+    lname=formData["sname"]
+    email = formData['email']
+    password1 = formData['password']
+    email2=formData['personal_email']
+    user_role=formData['user_role']
+    national_id=formData['National_ID_Number']
+    phone=formData['Phone']
+    personal_phone=formData['Personal_Phone']
+    title=formData['title']
+    unit_id=formData['Unit_ID']
+    addr=formData['addr']
+    headUser=formData['Head_User_ID']
     
     hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
 
