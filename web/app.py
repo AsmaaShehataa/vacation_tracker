@@ -373,7 +373,7 @@ def register():
         personal_phone=personal_phone,
         phone=phone,
         unit_id=unit_data.id,
-        head_user_id=headUser
+        # head_user_id=headUser
     )
     storage.new(entry)
     
