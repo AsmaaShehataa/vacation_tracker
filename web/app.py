@@ -333,6 +333,7 @@ def contact():
 @app.route("/register", strict_slashes=False, methods=["GET", "POST"])
 def register():
     formData = request.form.to_dict()
+    print('formData', formData)
     title=formData["title"]
     fname=formData["fname"]
     lname=formData["sname"]
