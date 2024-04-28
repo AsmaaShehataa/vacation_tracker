@@ -280,30 +280,30 @@ def dashboard():
     users
     """
     print('current user', storage.count(User))
-    if current_user.user_role == 'Super Admin':
-        users = storage.all(User)
-        users = list(users.values())
-        for user in users:
-            print("user", user)
-            user.unit_name = storage.get_unit_id_by_id(user.unit_id).name
-        return render_template(
-            "dashboard.html",
-            users=storage.all(User),
-            name=type(storage.all(User)),
-            cache_id=uuid.uuid4(),
-            user_count=storage.count(User)
-        )
-    elif current_user.user_role == 'User':
-        return redirect('/user_dashboard')
-    elif current_user.user_role == 'Admin':
-        return redirect('/manager_dashboard')
-    
+    # if current_user.user_role == 'Super Admin':
+    users = storage.all(User)
+    users = list(users.values())
+    for user in users:
+        print("user", user)
+        user.unit_name = storage.get_unit_id_by_id(user.unit_id).name
     return render_template(
         "dashboard.html",
         users=storage.all(User),
         name=type(storage.all(User)),
-        cache_id=uuid.uuid4()
+        cache_id=uuid.uuid4(),
+        user_count=storage.count(User)
     )
+    # elif current_user.user_role == 'User':
+    #     return redirect('/user_dashboard')
+    # elif current_user.user_role == 'Admin':
+    #     return redirect('/manager_dashboard')
+    
+    # return render_template(
+    #     "dashboard.html",
+    #     users=storage.all(User),
+    #     name=type(storage.all(User)),
+    #     cache_id=uuid.uuid4()
+    # )
 
 @app.route("/logout", strict_slashes=False, methods=["GET", "POST"])
 @login_required
@@ -332,20 +332,20 @@ def contact():
 
 @app.route("/register", strict_slashes=False, methods=["GET", "POST"])
 def register():
-    title=request.form["title"]
-    fname=request.form["fname"]
-    lname=request.form["sname"]
-    email = request.form['email']
-    password1 = request.form['password']
-    email2=request.form['personal_email']
-    user_role=request.form['user_role']
-    national_id=request.form['National_ID_Number']
-    phone=request.form['Phone']
-    personal_phone=request.form['Personal_Phone']
-    title=request.form['title']
-    unit_id=request.form['Unit_ID']
-    addr=request.form['addr']
-    headUser=request.form['Head_User_ID']
+    title=request.form.to_dict()["title"]
+    fname=request.form.to_dict()["fname"]
+    lname=request.form.to_dict()["sname"]
+    email = request.form.to_dict()['email']
+    password1 = request.form.to_dict()['password']
+    email2=request.form.to_dict()['personal_email']
+    user_role=request.form.to_dict()['user_role']
+    national_id=request.form.to_dict()['National_ID_Number']
+    phone=request.form.to_dict()['Phone']
+    personal_phone=request.form.to_dict()['Personal_Phone']
+    title=request.form.to_dict()['title']
+    unit_id=request.form.to_dict()['Unit_ID']
+    addr=request.form.to_dict()['addr']
+    headUser=request.form.to_dict()['Head_User_ID']
     
     hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
 
