@@ -274,36 +274,36 @@ def apply_for_leave():
 
 
 @app.route("/dashboard", strict_slashes=False, methods=["GET", "POST"])
-# @login_required
+@login_required
 def dashboard():
     """
     users
     """
     print('current user', storage.count(User))
-    # if current_user.user_role == 'Super Admin':
-    users = storage.all(User)
-    users = list(users.values())
-    for user in users:
-        print("user", user)
-        user.unit_name = storage.get_unit_id_by_id(user.unit_id).name
+    if current_user.user_role == 'Super Admin':
+        users = storage.all(User)
+        users = list(users.values())
+        for user in users:
+            print("user", user)
+            user.unit_name = storage.get_unit_id_by_id(user.unit_id).name
+        return render_template(
+            "dashboard.html",
+            users=storage.all(User),
+            name=type(storage.all(User)),
+            cache_id=uuid.uuid4(),
+            user_count=storage.count(User)
+        )
+    elif current_user.user_role == 'User':
+        return redirect('/user_dashboard')
+    elif current_user.user_role == 'Admin':
+        return redirect('/manager_dashboard')
+    
     return render_template(
         "dashboard.html",
         users=storage.all(User),
         name=type(storage.all(User)),
-        cache_id=uuid.uuid4(),
-        user_count=storage.count(User)
+        cache_id=uuid.uuid4()
     )
-    # elif current_user.user_role == 'User':
-    #     return redirect('/user_dashboard')
-    # elif current_user.user_role == 'Admin':
-    #     return redirect('/manager_dashboard')
-    
-    # return render_template(
-    #     "dashboard.html",
-    #     users=storage.all(User),
-    #     name=type(storage.all(User)),
-    #     cache_id=uuid.uuid4()
-    # )
 
 @app.route("/logout", strict_slashes=False, methods=["GET", "POST"])
 @login_required
@@ -332,32 +332,26 @@ def contact():
 
 @app.route("/register", strict_slashes=False, methods=["GET", "POST"])
 def register():
-
-    if request.method == "GET":
-            return redirect('/dashboard')
-
-    
-    formData = request.form.to_dict()
-    print('formData', formData)
-    title=formData["title"]
-    fname=formData["fname"]
-    lname=formData["sname"]
-    email = formData['email']
-    password1 = formData['password']
-    email2=formData['personal_email']
-    user_role=formData['user_role']
-    national_id=formData['National_ID_Number']
-    phone=formData['Phone']
-    personal_phone=formData['Personal_Phone']
-    unit_id=formData['Unit_ID']
-    addr=formData['addr']
-    # headUser=formData['Head_User_ID']
+    title=request.form["title"]
+    fname=request.form["fname"]
+    lname=request.form["sname"]
+    email = request.form['email']
+    password1 = request.form['password']
+    email2=request.form['personal_email']
+    user_role=request.form['user_role']
+    national_id=request.form['National_ID_Number']
+    phone=request.form['Phone']
+    personal_phone=request.form['Personal_Phone']
+    title=request.form['title']
+    unit_id=request.form['Unit_ID']
+    addr=request.form['addr']
+    headUser=request.form['Head_User_ID']
     
     hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
 
     unit_data = storage.get_unit_id_by_name(unit_id)
-    # if unit_data is None:
-    #     return redirect('/register')
+    if unit_data is None:
+        return redirect('/register')
     print('unit_data', unit_data)
 
     
@@ -373,7 +367,7 @@ def register():
         personal_phone=personal_phone,
         phone=phone,
         unit_id=unit_data.id,
-        # head_user_id=headUser
+        head_user_id=headUser
     )
     storage.new(entry)
     
