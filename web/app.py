@@ -372,7 +372,7 @@ def register():
         national_id_number=national_id,
         personal_phone=personal_phone,
         phone=phone,
-        unit_id="unit_data.id",
+        unit_id=unit_data.id,
         head_user_id=headUser
     )
     storage.new(entry)
