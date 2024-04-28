@@ -330,8 +330,9 @@ def contact():
 
 
 
-@app.route("/register", strict_slashes=False, methods=["GET", "POST"])
+@app.route("/register", strict_slashes=False, methods=["POST"])
 def register():
+    
     formData = request.form.to_dict()
     print('formData', formData)
     title=formData["title"]
