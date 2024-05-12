@@ -89,6 +89,19 @@
         .submit-btn:hover {
             background-color: #45a049;
         }
+        .leave-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px;
+            height: 20px;
+        }
+        .leave-btn:hover {
+            background-color: #45a049;
+        }
         
 
 
@@ -146,7 +159,13 @@
         </div>
         {% endif %}
         {% endwith %}
-        <h1>Welcome {{fname}} {{lname}}</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Welcome {{fname}} {{lname}}</h1>
+            <a href="/user_dashboard"  class="leave-btn">
+                Apply For Leaves
+            </a>
+
+        </div>
         <hr/>
         <div>
             <h2>Vacation Requests</h2>
